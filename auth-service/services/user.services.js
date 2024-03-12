@@ -14,7 +14,11 @@ module.exports = {
         return db.User.findOne({
             where : {
                 email
-            }
+            },
+            include: 'profile'
         })
+    },
+    authenticate() {
+        
     }
 }

@@ -17,7 +17,6 @@ module.exports = {
         // eslint-disable-next-line no-unused-vars
         notFoundError : (req,res,next) => {
             try {
-                console.log('baseurl:',req.baseurl);
                 throw new NotFoundException('Not found');
             } catch (err) {
                 console.log(err);

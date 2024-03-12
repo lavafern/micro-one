@@ -1,5 +1,5 @@
 const { UnauthorizedException } = require("../expeptions/exceptions");
-
+const jwt = require('jsonwebtoken')
 module.exports = {
     verifyToken : (token,secret) => {
         return new Promise((resolve,reject) => {
