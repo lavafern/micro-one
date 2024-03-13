@@ -1,6 +1,5 @@
 const { UnauthorizedException } = require("../expeptions/exceptions")
-const {AUTH_SERVICE_URL} = process.env
-const redis = require('../libs/redis')
+const {redis1,redis2} = require('../libs/redis')
 
 
 module.exports = async (req,res,next) => {
@@ -9,19 +8,23 @@ module.exports = async (req,res,next) => {
 
         if (!token) throw new UnauthorizedException("unauthorized")
 
-        await redis.publish('authenticate',token)
+        await redis1.publish('authenticate',token)
 
-        await redis.subscribe('authenticate-response', (data)=> {
-            const response = JSON.parse(data)
+        const res = await new Promise((resolve,reject) => {
+            redis2.subscribe('authenticate-response', (data)=> {
+                const response = JSON.parse(data)
 
-            if (!response.response) {
-                return res.json({
-                    message:'kelar'
-                })
-            }
+                if (!response.response) {
+                    reject(new UnauthorizedException("Unauthenticated"))
+                } else {
+                    resolve(response.response)
+                } 
+            })
 
         })
 
+        console.log('res:::',res);
+            
         next()
 
     } catch (err) {

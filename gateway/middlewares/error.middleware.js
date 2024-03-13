@@ -4,7 +4,7 @@ module.exports = {
     // eslint-disable-next-line no-unused-vars
         otherError : (err,req,res,next) => {
             err.statusCode = err.statusCode || 500;
-            console.log(err);
+            console.log('tererror',err);
              
             return res
                 .status(err.statusCode)

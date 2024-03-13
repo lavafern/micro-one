@@ -35,7 +35,8 @@ module.exports = {
                 
                 console.log('token :',token);
 
-                authResponse = await verifyToken(token)
+                authResponse = await verifyToken(token,'secret')
+
 
                 await redis2.publish('authenticate-response',JSON.stringify({response:authResponse}))
 

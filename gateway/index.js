@@ -8,7 +8,6 @@ const cookies = require('cookie-parser');
 
 app.use(cookies())
 
-
 const authenticate= require('./middlewares/authentication.middleware')
 app.use('/api/v1/auth', createProxyMiddleware({
     target : AUTH_SERVICE_URL,
