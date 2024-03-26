@@ -24,7 +24,7 @@ module.exports = async (req,res,next) => {
         })
 
         console.log('res:::',res);
-            
+        req.user = res
         next()
 
     } catch (err) {
